@@ -4,8 +4,10 @@ import Likes from "./Likes"
 import CommentsSetup from "./CommentsSetup"
 
 function App() {
-  const [likes, setLikes] = useState(video.upvotes)
-  const [dislikes, setDislikes] = useState(video.downvotes)
+  const copyVideo = {...video}
+  
+  const [likes, setLikes] = useState(copyVideo.upvotes)
+  const [dislikes, setDislikes] = useState(copyVideo.downvotes)
   const [hideComments, setHideComments] = useState(false)
 
   function onLikes(){
@@ -25,15 +27,15 @@ function App() {
       <iframe
         width="919"
         height="525"
-        src={video.embedUrl}
+        src={copyVideo.embedUrl}
         frameBorder="0"
         allowFullScreen
-        title={video.title}
+        title={copyVideo.title}
       />
-      <h1>{video.title}</h1>
-      <p>{video.views} Views | Uploaded {video.createdAt}</p>
+      <h1>{copyVideo.title}</h1>
+      <p>{copyVideo.views} Views | Uploaded {copyVideo.createdAt}</p>
       <Likes onLikes={onLikes} likes={likes} onDislikes={onDislikes} dislikes={dislikes} />
-      <CommentsSetup onHideComments={onHideComments} hideComments={hideComments} comments={video.comments} />
+      <CommentsSetup onHideComments={onHideComments} hideComments={hideComments} comments={copyVideo.comments} />
     </div>
   );
 }
